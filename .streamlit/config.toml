@@ -1,4 +1,5 @@
 [theme]
 base="light"
-primaryColor="#4b92ff"
-textColor="#313c67"
+primaryColor="#568495"           # Couleur principale du logo
+secondaryBackgroundColor="#F0F4F7" # Fond secondaire très clair pour un meilleur contraste
+textColor="#364455"              # Texte foncé pour une lecture aisée
