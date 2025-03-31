@@ -140,7 +140,7 @@ if user_password == PASSWORD:
     # On parcourt le plan 1 et le plan 2
     for plan_name, plan in zip(["Plan 1", "Plan 2"], [plan1, plan2]):
         # Nombre total d'ouvriers de 10 à 40
-        for nb_ouvriers in range(10, 41):
+        for nb_ouvriers in range(10,41):
             # Contrainte : au moins 50 % en réinsertion
             nb_min_reinsertion = int(np.ceil(nb_ouvriers * 0.5))
             for nb_ouvriers_reinsertion in range(nb_min_reinsertion, nb_ouvriers+1):

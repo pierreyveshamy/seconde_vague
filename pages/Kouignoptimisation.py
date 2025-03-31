@@ -158,8 +158,8 @@ def main():
         st.success("Optimisation terminée !")
         st.markdown("### Top 10 des combinaisons optimales")
         st.dataframe(df_best.head(10))
-        st.markdown("### Top 50")
-        st.dataframe(df_best.head(300))  # Affiche seulement les 50 meilleures solutions
+        st.markdown("### Top 200")
+        st.dataframe(df_best.head(200))  # Affiche seulement les 200 meilleures solutions
 
 
 if __name__ == "__main__":
