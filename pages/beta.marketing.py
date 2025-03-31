@@ -3,7 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 
-PASSWORD = "**********" #hide
+PASSWORD = st.secrets["HAMY_TOKEN"] #encrypted
 user_password = st.text_input("Entrez le token d'administration pour accéder à cette page :", type="password")
 if user_password == PASSWORD:
     st.success("vérifié")

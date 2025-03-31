@@ -2,18 +2,11 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-# Définir le mot de passe (à remplacer par votre propre mot de passe)
-PASSWORD = "mdp"
 
-# Demander à l'utilisateur de saisir un mot de passe
+PASSWORD = st.secrets["HAMY_TOKEN"] #encrypted
 user_password = st.text_input("Entrez le token d'administration pour accéder à cette page :", type="password")
-
-# Vérifier si le mot de passe saisi est correct
 if user_password == PASSWORD:
     st.success("vérifié")
-    
-    # Contenu de la page protégée
-    st.title("Page protégée")
     
     
     # Paramètres fixes (à adapter si nécessaire)
