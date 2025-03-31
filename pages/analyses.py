@@ -257,7 +257,7 @@ def main():
             "Coûts variables totaux", 
             "Marge sur coûts variables",
             "Taux de marge brute (%)",
-            "Résultat net hebdomadaire"
+            "Résultat net annuel"
         ],
         "Valeur": [
             f"{revenu_total_annuel:,.2f} €", 
