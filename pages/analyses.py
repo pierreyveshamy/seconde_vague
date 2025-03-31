@@ -11,7 +11,7 @@ def main():
     col1, col2 = st.columns([0.8, 4])  # Le rapport ici 1:4 permet à l'image d'être plus petite que le titre
 
     with col1:
-        st.image("/Users/pierreyves/Desktop/Cas Bretagne/Kouign-removebg-preview.png")
+        st.image("Kouign-removebg-preview.png")
 
     with col2:
         st.title("Tableau de bord stratégique")
