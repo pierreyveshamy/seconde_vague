@@ -28,9 +28,8 @@ st.markdown("""
 
 st.title("Welcome Yves ! 🐟")
 
-st.write("Rendez-vous sur la page **Analytique**, pour étudier l'influence des choix stratégiques sur vos résultats financiers et autres KPIs")
-st.write("Rendez-vous sur la page **Kouign'optimisation**, pour générer le scénario optimal vous garantissant des résultats maximaux sur vos résultats financiers et autres KPIs")
-st.write("Rendez-vous sur la page **Marketing**, pour estimer l'influence de vos investissements marketing sur vos ventes")
+st.write("Rendez-vous sur la page **Analyses de données**, pour étudier l'influence des choix stratégiques sur vos résultats financiers et autres KPIs")
+st.write("Rendez-vous sur la page **GALETTES v1**, pour générer le scénario optimal vous garantissant des résultats maximaux sur vos résultats financiers et autres KPIs")
 
 st.image("https://cdna.artstation.com/p/assets/images/images/040/550/526/original/tt_art-sardine-swim2-2.gif?1629201172", 
          use_container_width=True)
