@@ -16,12 +16,7 @@ def main():
     with col2:
         st.title("Tableau de bord stratégique")
         st.markdown("### Kouign a'Management pour Yves Le Quellec")
-    
-    st.markdown("""
-    <div style="color: lightgray; padding-top: 5px;">
-        Powered by Python 3.13.2 64-bit
-    </div>
-    """, unsafe_allow_html=True)
+ 
         
     st.sidebar.header("PARAMETRES STRATEGIQUES")
     
