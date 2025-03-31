@@ -6,14 +6,14 @@ import streamlit as st
 PASSWORD = "mdp"
 
 # Demander à l'utilisateur de saisir un mot de passe
-user_password = st.text_input("Entrez le mot de passe pour accéder à cette page :", type="password")
+user_password = st.text_input("Entrez le token d'administration pour accéder à cette page :", type="password")
 
 # Vérifier si le mot de passe saisi est correct
 if user_password == PASSWORD:
-    st.success("Mot de passe correct")
+    st.success("vérifié")
     
     # Contenu de la page protégée
-    st.title("Page protégée par mot de passe")
+    st.title("Page protégée")
     
     
     # Paramètres fixes (à adapter si nécessaire)
