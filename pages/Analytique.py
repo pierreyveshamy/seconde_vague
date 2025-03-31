@@ -8,14 +8,18 @@ def main():
     st.set_page_config(page_title="Tableau de bord stratégique - Yves Le Quellec", layout="wide")
 
     
-    col1, col2 = st.columns([0.8, 4])
+    col1, col2, col3 = st.columns([1.1, 4,  1])
 
     with col1:
         st.image("Kouign-removebg-preview.png")
-
+    
     with col2:
         st.title("Tableau de bord stratégique")
         st.markdown("### Kouign a'Management pour Yves Le Quellec")
+    
+    with col3:
+        st.image("tt-art-sardine-swim2-2-2-unscreen.gif")
+        
  
         
     st.sidebar.header("PARAMETRES STRATEGIQUES")
@@ -222,17 +226,17 @@ def main():
     marge_brute = revenu_total_annuel - cout_matieres_total_annuel
     marge_sur_cout_variable = revenu_total_annuel - couts_variables_totaux_annuel
     
-    part_marketing = st.sidebar.slider("Pourcentage du C.A. alloué (%)", 0, 10, 5)
+    part_marketing = st.sidebar.slider("Pourcentage du C.A. alloué (%)", 0.0, 15.0, 5.0,step=0.1)
     st.sidebar.markdown(f"Soit {revenu_total_annuel*part_marketing/100} € dédié au marketing")
     
     #Si la production dépasse les objectifs de ventes, il y aura des invendus non comptabilisés dans le C.A.
     
     subvention_reinsertion_annuelle = nb_ouvriers_reinsertion * 7500
     
-    st.markdown(f"**Production de boîtes de filets hebdomadaire** : {prod_filets_hebdo}")
+    st.markdown(f"**Production de boîtes de filets hebdomadaire** : {int(prod_filets_hebdo)}")
     st.markdown(f"**Objectifs de ventes de boîtes de filets hebdomadaires** : {ventes_filets * 5}")
 
-    st.markdown(f"**Production de boîtes de sardines entières hebdomadaire** : {prod_entieres_hebdo}")
+    st.markdown(f"**Production de boîtes de sardines entières hebdomadaire** : {int(prod_entieres_hebdo)}")
     st.markdown(f"**Objectifs de ventes de boîtes de sardines entières hebdomadaires** : {ventes_entieres * 5}")
 
     
