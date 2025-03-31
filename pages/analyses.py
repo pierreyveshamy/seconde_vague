@@ -251,7 +251,7 @@ def main():
             "Autres coûts variables (expédition et frais commerciaux)",
             "Coûts variables totaux", 
             "Marge sur coûts variables",
-            "Taux de marge brute (%)",
+            "Taux de marge brute",
             "Résultat net annuel"
         ],
         "Valeur": [
@@ -260,7 +260,7 @@ def main():
             f"{couts_variables_totaux_annuel:,.2f} €",
             f"{couts_variables_totaux_annuel:,.2f} €", 
             f"{marge_sur_cout_variable:,.2f} €",
-            f"{taux_marge_brute:,.2f} €",
+            f"{taux_marge_brute:,.2f} %",
             f"{resultat_net:,.2f} €"
         ]
     })
