@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+    
 def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion, ventes_SE, ventes_FS, effic_reinsertion):
     """
     Calcule le résultat net annuel à partir des paramètres.
@@ -20,6 +20,7 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
         "entieres": rendement_exp["entieres"] * effic_reinsertion / 100,
         "filets": rendement_exp["filets"] * effic_reinsertion / 100
     }
+    
     
     # Répartition du personnel
     nb_classiques = nb_total - nb_reinsertion
@@ -62,7 +63,7 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
     prix_FS = 1.5
     cout_matiere_SE = 0.5
     cout_matiere_FS = 0.4
-
+    
     revenu_total = annual_sales_SE * prix_SE + annual_sales_FS * prix_FS
     cout_matiere_total = prod_SE_year * cout_matiere_SE + prod_FS_year * cout_matiere_FS
     cout_expedition = (prod_SE_year + prod_FS_year) * 0.045
@@ -97,14 +98,13 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
     return resultat_net
 
 @st.cache_data(show_spinner=False)
-def run_optimization():
+def run_optimization(nb_ouvriers):
     results = []
+    combinations_count = 0  # Compteur des combinaisons analysées
     for plan in [1, 2]:
-        for nb_total in range(10, 41):  # de 10 à 40 ouvriers
-            # contrainte: au moins 50% en réinsertion
+        for nb_total in range(10, nb_ouvriers+1):  # de 10 à nb_ouvriers
             for nb_reinsertion in range(int(np.ceil(nb_total * 0.5)), nb_total + 1):
                 for nb_SE in range(0, nb_total + 1):
-                    # Pour nb_SE_reinsertion, bornes minimales et maximales
                     min_SE_reinsertion = max(0, nb_SE - (nb_total - nb_reinsertion))
                     max_SE_reinsertion = min(nb_SE, nb_reinsertion)
                     for nb_SE_reinsertion in range(min_SE_reinsertion, max_SE_reinsertion + 1):
@@ -127,13 +127,13 @@ def run_optimization():
                                             "Efficacité reinsertion (%)": effic,
                                             "Résultat net annuel (€)": res
                                         })
+                                    combinations_count += 1  # Incrémenter le compteur pour chaque combinaison analysée
     df_results = pd.DataFrame(results)
-    df_best = df_results.sort_values(by="Résultat_net (€)", ascending=False).reset_index(drop=True)
-    return df_best
+    df_best = df_results.sort_values(by="Résultat net annuel (€)", ascending=False).reset_index(drop=True)
+    return df_best, combinations_count  # Retourner aussi le nombre de combinaisons analysées
 
 def main():
     st.set_page_config(page_title="(KAMO) Kouign A'Metaheuristic Optimization", layout="wide")
-    
     
     col1, col2 = st.columns([0.8, 4])
 
@@ -141,8 +141,8 @@ def main():
         st.image("Kouign-removebg-preview.png")
 
     with col2:
-        st.title("Kouign'optimisation du résultat net")
-        st.markdown("### Algorithme d'optimisation paramétrique")
+        st.title("GALETTES v1 : notre algorithme d'optimisation du résultat net")
+        st.markdown("#### (Generative Algorithm for Linear Estimation Toward Total Efficiency & Success)")
                     
     st.write(
         """
@@ -156,15 +156,20 @@ def main():
         - Efficacité des ouvriers en réinsertion (entre 60% et 80%)
         """
     )
+    
+    st.title("Nombre d'ouvriers")
+    nb_ouvriers = st.slider("Nombre d'ouvriers maximal souhaité", 1,40,22)
+
 
     if st.button("Lancer l'optimisation"):
         with st.spinner("Optimisation en cours, merci de patienter..."):
-            df_best = run_optimization()
-        st.success("Optimisation terminée !")
+            df_best, combinations_count = run_optimization(nb_ouvriers)  # Récupère aussi le nombre de combinaisons
+        st.success(f"Optimisation terminée ! {combinations_count} combinaisons analysées.")  # Affiche le nombre de combinaisons
         st.markdown("### Top 10 des combinaisons optimales")
         st.dataframe(df_best.head(10))
         st.markdown("### Top 100")
         st.dataframe(df_best.head(100)) 
+
 
     st.markdown("""
     <div style="color: lightgray; padding-top: 20px;">
