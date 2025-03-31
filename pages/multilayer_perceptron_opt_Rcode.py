@@ -183,3 +183,9 @@ if user_password == PASSWORD:
 else:
     if user_password != "":
         st.error("Mot de passe incorrect. Veuillez réessayer.")
+        
+st.markdown("""
+    <div style="color: lightgray; padding-top: 20px;">
+        Powered by Python 3.13.2 64-bit © 2025 MASSAS GRATIOT HAMY. All rights reserved.
+    </div>
+    """, unsafe_allow_html=True)

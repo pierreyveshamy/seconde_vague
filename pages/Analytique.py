@@ -8,7 +8,7 @@ def main():
     st.set_page_config(page_title="Tableau de bord stratégique - Yves Le Quellec", layout="wide")
 
     
-    col1, col2 = st.columns([0.8, 4])  # Le rapport ici 1:4 permet à l'image d'être plus petite que le titre
+    col1, col2 = st.columns([0.8, 4])
 
     with col1:
         st.image("Kouign-removebg-preview.png")
@@ -26,7 +26,7 @@ def main():
         
     # Catégorie : Ajustement du personnel
     st.sidebar.subheader("AJUSTEMENT DES OUVRIERS")
-    nb_ouvriers = st.sidebar.slider("Nombre ouvriers total", 0, 40, 22)
+    nb_ouvriers = st.sidebar.slider("Nombre ouvriers total", 1, 40, 22)
     nb_ouvriers_reinsertion = st.sidebar.slider("Nombre ouvriers en réinsertion", 0, nb_ouvriers, 11, key="ouvriers_reinsertion")
     efficacite_reinsertion = st.sidebar.slider("Efficacité des ouvriers en réinsertion (%)", 60, 100, 70, key="efficacite_reinsertion")
 
@@ -77,6 +77,7 @@ def main():
     ventes_entieres = st.sidebar.slider("Ventes journalières - Sardines entières", 7000, 10000, 8500, key="ventes_entieres")
     ventes_filets = st.sidebar.slider("Ventes journalières - Filets de sardines", 2000, 5000, 3500, key="ventes_filets")
     
+
     # Catégorie : Rendement et efficacité
     rendement_reinsertion = {"entieres": rendement_exp["entieres"] * efficacite_reinsertion/100, "filets": rendement_exp["filets"] * efficacite_reinsertion/100} 
     
@@ -221,6 +222,9 @@ def main():
     marge_brute = revenu_total_annuel - cout_matieres_total_annuel
     marge_sur_cout_variable = revenu_total_annuel - couts_variables_totaux_annuel
     
+    part_marketing = st.sidebar.slider("Pourcentage du C.A. alloué (%)", 0, 10, 5)
+    st.sidebar.markdown(f"Soit {revenu_total_annuel*part_marketing/100} € dédié au marketing")
+    
     #Si la production dépasse les objectifs de ventes, il y aura des invendus non comptabilisés dans le C.A.
     
     subvention_reinsertion_annuelle = nb_ouvriers_reinsertion * 7500
@@ -241,8 +245,9 @@ def main():
     
     
     taux_marge_brute = (marge_brute / revenu_total_annuel) * 100
-    resultat_net = revenu_total_annuel - couts_variables_totaux_annuel - couts_fixes_annuels + subvention_reinsertion_annuelle
+    resultat_net = revenu_total_annuel - couts_variables_totaux_annuel - couts_fixes_annuels + subvention_reinsertion_annuelle - revenu_total_annuel*part_marketing/100
     
+
     st.markdown("## KPIs financiers annuels")
     df_finance = pd.DataFrame({
         "Indicateur": [
@@ -252,8 +257,12 @@ def main():
             "Coûts variables totaux", 
             "Marge sur coûts variables",
             "Taux de marge brute",
+            "Budget marketing",
             "Résultat net annuel"
         ],
+        
+        
+        
         "Valeur": [
             f"{revenu_total_annuel:,.2f} €", 
             f"{cout_matieres_total_annuel:,.2f} €",
@@ -261,6 +270,7 @@ def main():
             f"{couts_variables_totaux_annuel:,.2f} €", 
             f"{marge_sur_cout_variable:,.2f} €",
             f"{taux_marge_brute:,.2f} %",
+            f"{revenu_total_annuel*part_marketing/100:,.2f} €",
             f"{resultat_net:,.2f} €"
         ]
     })

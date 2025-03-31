@@ -123,14 +123,14 @@ def run_optimization():
                                     if res is not None:
                                         results.append({
                                             "Plan": "Plan 1" if plan == 1 else "Plan 2",
-                                            "Nb_total": nb_total,
-                                            "Nb_reinsertion": nb_reinsertion,
-                                            "Nb_SE": nb_SE,
-                                            "Nb_SE_reinsertion": nb_SE_reinsertion,
-                                            "Ventes_SE": ventes_SE,
-                                            "Ventes_FS": ventes_FS,
-                                            "Efficacité_reinsertion (%)": effic,
-                                            "Résultat_net (€)": res
+                                            "Nb total d'ouvriers": nb_total,
+                                            "Nb en reinsertion": nb_reinsertion,
+                                            "Nb d'ouvriers sur les sardines entières": nb_SE,
+                                            "Nb d'ouvriers en reinsertion sur les sardines entières": nb_SE_reinsertion,
+                                            "Ventes de sardines entières projetées": ventes_SE,
+                                            "Ventes de filets projetées": ventes_FS,
+                                            "Efficacité reinsertion (%)": effic,
+                                            "Résultat net annuel (€)": res
                                         })
     df_results = pd.DataFrame(results)
     df_best = df_results.sort_values(by="Résultat_net (€)", ascending=False).reset_index(drop=True)
@@ -138,7 +138,17 @@ def run_optimization():
 
 def main():
     st.set_page_config(page_title="(KAMO) Kouign A'Metaheuristic Optimization", layout="wide")
-    st.title("Kouign'optimisation du résultat net")
+    
+    
+    col1, col2 = st.columns([0.8, 4])
+
+    with col1:
+        st.image("Kouign-removebg-preview.png")
+
+    with col2:
+        st.title("Kouign'optimisation du résultat net")
+        st.markdown("### Algorithme d'optimisation paramétrique")
+                    
     st.write(
         """
         Détection et analyses des paramètres afin de maximiser le résultat net 
@@ -158,9 +168,14 @@ def main():
         st.success("Optimisation terminée !")
         st.markdown("### Top 10 des combinaisons optimales")
         st.dataframe(df_best.head(10))
-        st.markdown("### Top 200")
-        st.dataframe(df_best.head(200))  # Affiche seulement les 200 meilleures solutions
+        st.markdown("### Top 150")
+        st.dataframe(df_best.head(150))  # Affiche seulement les 200 meilleures solutions
 
-
+    st.markdown("""
+    <div style="color: lightgray; padding-top: 20px;">
+        Powered by Python 3.13.2 64-bit © 2025 MASSAS GRATIOT HAMY. All rights reserved.
+    </div>
+    """, unsafe_allow_html=True)
+    
 if __name__ == "__main__":
     main()
