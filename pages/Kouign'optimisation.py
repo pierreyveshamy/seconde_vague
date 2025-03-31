@@ -42,15 +42,15 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
     prod_SE_h = nb_SE_classique * rendement_exp["entieres"] + nb_SE_reinsertion * rendement_reinsertion["entieres"]
     prod_FS_h = nb_FS_classique * rendement_exp["filets"] + nb_FS_reinsertion * rendement_reinsertion["filets"]
 
-    # Contrainte : éviter le goulot d'étranglement sur la machine
+    # Evite goulot d'étranglement sur la machine
     if prod_SE_h + prod_FS_h > capacite_machine:
         return None  # solution non viable
 
-    # Production hebdomadaire (35 heures par semaine, 5 jours ouvrés)
+    # Prod hebdomadaire (35 heures par semaine, 5j ouvrés)
     prod_SE_week = prod_SE_h * 35
     prod_FS_week = prod_FS_h * 35
 
-    # Production annuelle (46 semaines)
+    # Prod annuelle (46 semaines)
     prod_SE_year = prod_SE_week * 46
     prod_FS_year = prod_FS_week * 46
 
@@ -58,23 +58,19 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
     annual_sales_SE = min(prod_SE_year, ventes_SE * 5 * 52)
     annual_sales_FS = min(prod_FS_year, ventes_FS * 5 * 52)
 
-    # Tarifs et coûts matières
     prix_SE = 0.9
     prix_FS = 1.5
     cout_matiere_SE = 0.5
     cout_matiere_FS = 0.4
 
-    # Calcul des revenus et des coûts
     revenu_total = annual_sales_SE * prix_SE + annual_sales_FS * prix_FS
     cout_matiere_total = prod_SE_year * cout_matiere_SE + prod_FS_year * cout_matiere_FS
     cout_expedition = (prod_SE_year + prod_FS_year) * 0.045
     cout_commission = 0.1 * revenu_total
     cout_variables = cout_matiere_total + cout_expedition + cout_commission
 
-    # Subventions (7 500€ par an et par ouvrier en réinsertion)
     subvention = nb_reinsertion * 7500
 
-    # Calcul des coûts fixes (salaires + loyers, électricité, etc.)
     salaire_Yves = 2500
     salaire_secretaire = 1500
     salaire_magasinier = 1200
@@ -103,7 +99,6 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
 @st.cache_data(show_spinner=False)
 def run_optimization():
     results = []
-    # Parcours des plages discrètes pour l'exploration
     for plan in [1, 2]:
         for nb_total in range(10, 41):  # de 10 à 40 ouvriers
             # contrainte: au moins 50% en réinsertion
@@ -169,7 +164,7 @@ def main():
         st.markdown("### Top 10 des combinaisons optimales")
         st.dataframe(df_best.head(10))
         st.markdown("### Top 100")
-        st.dataframe(df_best.head(100))  # Affiche seulement les 200 meilleures solutions
+        st.dataframe(df_best.head(100)) 
 
     st.markdown("""
     <div style="color: lightgray; padding-top: 20px;">

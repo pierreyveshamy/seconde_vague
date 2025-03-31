@@ -1,9 +1,7 @@
 import streamlit as st
 
-# Configuration de la page
 st.set_page_config(page_title="Dashboard", layout="wide", page_icon="🐟")
 
-# Personnalisation du style
 st.markdown("""
     <style>
     body {
@@ -28,19 +26,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Titre de la page
 st.title("Welcome Yves ! 🐟")
 
-# Textes avec descriptions
 st.write("Rendez-vous sur la page **Analytique**, pour étudier l'influence des choix stratégiques sur vos résultats financiers et autres KPIs")
 st.write("Rendez-vous sur la page **Kouign'optimisation**, pour générer le scénario optimal vous garantissant des résultats maximaux sur vos résultats financiers et autres KPIs")
 st.write("Rendez-vous sur la page **Marketing**, pour estimer l'influence de vos investissements marketing sur vos ventes")
 
-# Ajouter une image animée sur le thème de la mer (exemple d'une sardine nageant)
 st.image("https://cdna.artstation.com/p/assets/images/images/040/550/526/original/tt_art-sardine-swim2-2.gif?1629201172", 
          use_container_width=True)
 
-# Ajouter un fond d'écran de la mer pour une ambiance plus immersive
 st.markdown("""
     <style>
     .main {
