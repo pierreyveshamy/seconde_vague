@@ -107,15 +107,15 @@ def compute_net_result(plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
 def run_optimization(nb_ouvriers):
     results = []
     combinations_count = 0
-    for plan in [1, 2]:
+    for plan in [1]:
         for nb_total in range(10, nb_ouvriers+1):
             for nb_reinsertion in range(int(np.ceil(nb_total * 0.5)), nb_total + 1):
                 for nb_SE in range(0, nb_total + 1):
                     min_SE_reinsertion = max(0, nb_SE - (nb_total - nb_reinsertion))
                     max_SE_reinsertion = min(nb_SE, nb_reinsertion)
                     for nb_SE_reinsertion in range(min_SE_reinsertion, max_SE_reinsertion + 1):
-                        for ventes_SE in range(0, 10001, 500):
-                            for ventes_FS in range(0, 5001, 500):
+                        for ventes_SE in range(2000, 10001, 500):
+                            for ventes_FS in range(2000, 5001, 500):
                                 for effic in range(60, 81, 5):
                                     res = compute_net_result(
                                         plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
