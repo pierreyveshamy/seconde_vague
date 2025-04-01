@@ -141,9 +141,9 @@ def main():
         st.image("Kouign-removebg-preview.png")
 
     with col2:
-        st.title("GALETTES v1 : notre algorithme d'optimisation du résultat net")
+        st.title("GALETTE v1 : notre algorithme d'optimisation du résultat net")
     
-    st.markdown("#### (Generative Algorithm for Linear Estimation Toward Total Efficiency & Success)",)
+    st.markdown("#### (Generative Algorithm for Linear Estimation Toward Total Efficiency)",)
     st.write("")  
     st.write("")               
     st.write(
