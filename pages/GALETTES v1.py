@@ -135,21 +135,22 @@ def run_optimization(nb_ouvriers):
 def main():
     st.set_page_config(page_title="(KAMO) Kouign A'Metaheuristic Optimization", layout="wide")
     
-    col1, col2 = st.columns([0.8, 4])
+    col1, col2 = st.columns([0.9, 4])
 
     with col1:
         st.image("Kouign-removebg-preview.png")
 
     with col2:
         st.title("GALETTES v1 : notre algorithme d'optimisation du résultat net")
-        st.markdown("#### (Generative Algorithm for Linear Estimation Toward Total Efficiency & Success)")
-                    
+    
+    st.markdown("#### (Generative Algorithm for Linear Estimation Toward Total Efficiency & Success)",)
+    st.write("")  
+    st.write("")               
     st.write(
         """
         Détection et analyses des paramètres afin de maximiser le résultat net 
         de la société de M. Le Guellec. Les paramètres optimisés sont :
-        - Choix du plan d'investissement (Plan 1 ou Plan 2)
-        - Nombre total d'ouvriers
+        - Choix du plan d'investissement (plan 1 vs plan 2)
         - Nombre d'ouvriers en réinsertion (minimum 50% du total)
         - Répartition des ouvriers aux sardines entières et filets
         - Ventes journalières prévues (sardines entières et filets)
