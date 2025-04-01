@@ -252,7 +252,7 @@ def main():
         "Valeur": [
             f"{revenu_total_annuel:,.2f} €", 
             f"{cout_matieres_total_annuel:,.2f} €",
-            f"{cout_matieres_total_annuel:,.2f} €",
+            f"{(prod_entieres_annee + prod_filets_annee) * 0.045 + 0.1 * revenu_total_annuel:,.2f} €",
             f"{couts_variables_totaux_annuel:,.2f} €", 
             f"{marge_sur_cout_variable:,.2f} €",
             f"{taux_marge_brute:,.2f} %",
