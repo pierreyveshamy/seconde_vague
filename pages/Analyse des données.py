@@ -70,8 +70,8 @@ def main():
     cout_matiere = {"entieres": 0.5, "filets": 0.4}  
     
     st.sidebar.subheader("PREVISIONS DES VENTES")
-    ventes_entieres = st.sidebar.slider("Ventes journalières - Sardines entières", 7000, 10000, 8500, key="ventes_entieres")
-    ventes_filets = st.sidebar.slider("Ventes journalières - Filets de sardines", 2000, 5000, 3500, key="ventes_filets")
+    ventes_entieres = st.sidebar.slider("Ventes journalières - Sardines entières", 0, 10000, 8500, key="ventes_entieres")
+    ventes_filets = st.sidebar.slider("Ventes journalières - Filets de sardines", 0, 5000, 3500, key="ventes_filets")
     
 
     rendement_reinsertion = {"entieres": rendement_exp["entieres"] * efficacite_reinsertion/100, "filets": rendement_exp["filets"] * efficacite_reinsertion/100} 
@@ -81,8 +81,6 @@ def main():
     
     nb_ouvriers_FS = max(0, nb_ouvriers - nb_ouvriers_SE)
     nb_ouvriers_FS_reinsertion = max(0, nb_ouvriers_reinsertion - nb_ouvriers_SE_reinsertion)
-    nb_ouvriers_FS = max(0,nb_ouvriers - nb_ouvriers_SE)
-    nb_ouvriers_FS_reinsertion = max(0,nb_ouvriers_reinsertion - nb_ouvriers_SE_reinsertion)
 
     nb_ouvriers_FS_classique = nb_ouvriers_FS - nb_ouvriers_FS_reinsertion
     nb_ouvriers_SE_classique = nb_ouvriers_SE - nb_ouvriers_SE_reinsertion
@@ -254,7 +252,7 @@ def main():
         "Valeur": [
             f"{revenu_total_annuel:,.2f} €", 
             f"{cout_matieres_total_annuel:,.2f} €",
-            f"{couts_variables_totaux_annuel:,.2f} €",
+            f"{cout_matieres_total_annuel:,.2f} €",
             f"{couts_variables_totaux_annuel:,.2f} €", 
             f"{marge_sur_cout_variable:,.2f} €",
             f"{taux_marge_brute:,.2f} %",

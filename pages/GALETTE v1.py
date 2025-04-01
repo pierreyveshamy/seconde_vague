@@ -14,7 +14,7 @@ def search_combination(df, search_params):
 
     rank = matching_rows.index[0]  # le meilleur résultat correspond à l'indice 0
     total = len(df)
-    score_percentage = (rank + 1) / total * 100
+    score_percentage = ((df.index.get_loc(rank) + 1) / total) * 100
     return score_percentage
 
 def interpret_score(score):
@@ -114,8 +114,8 @@ def run_optimization(nb_ouvriers):
                     min_SE_reinsertion = max(0, nb_SE - (nb_total - nb_reinsertion))
                     max_SE_reinsertion = min(nb_SE, nb_reinsertion)
                     for nb_SE_reinsertion in range(min_SE_reinsertion, max_SE_reinsertion + 1):
-                        for ventes_SE in range(7000, 10001, 500):
-                            for ventes_FS in range(2000, 5001, 500):
+                        for ventes_SE in range(0, 10001, 500):
+                            for ventes_FS in range(0, 5001, 500):
                                 for effic in range(60, 81, 5):
                                     res = compute_net_result(
                                         plan, nb_total, nb_reinsertion, nb_SE, nb_SE_reinsertion,
@@ -134,8 +134,20 @@ def run_optimization(nb_ouvriers):
                                             "Résultat net annuel (€)": res
                                         })
                                     combinations_count += 1
-    df_results = pd.DataFrame(results)
-    df_best = df_results.sort_values(by="Résultat net annuel (€)", ascending=False).reset_index(drop=True)
+        df_results = pd.DataFrame(results)
+        df_best = df_results.sort_values(by="Résultat net annuel (€)", ascending=False).reset_index(drop=True)
+
+        df_best["Total ventes"] = df_best["Ventes de sardines entières projetées"] + df_best["Ventes de filets projetées"]
+
+        indices_a_garder = df_best.groupby("Résultat net annuel (€)")["Total ventes"].idxmin()
+
+        df_best = df_best.loc[indices_a_garder].reset_index(drop=True)
+
+        df_best.drop(columns="Total ventes", inplace=True)
+        
+        df_best = df_best.sort_values(by="Résultat net annuel (€)", ascending=False).reset_index(drop=True)
+
+
     return df_best, combinations_count
 
 def main():
